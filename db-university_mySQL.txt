@@ -152,7 +152,7 @@
 
 ?7. BONUS: Selezionare per ogni studente quanti tentativi d’esame ha sostenuto per superare ciascuno dei suoi esami
 
-*(# Prima Soluzione)
+*(1° Prima Soluzione)
 
     1  SELECT `students`.`name`, `students`.`surname`, `courses`.`name`, COUNT(`exam_student`.`vote`) AS `num_tentativi`
     2  FROM `students`
@@ -165,7 +165,7 @@
     9  GROUP BY `students`.`id`, `courses`.`id`
     10 HAVING MAX(`exam_student`.`vote`) >= 18;
 
-*(# Seconda Soluzione)
+*(2° Seconda Soluzione)
 
     1  SELECT `students`.`name`, `students`.`surname`, `courses`.`name`, COUNT(`exam_student`.`vote`) AS `num_tentativi`
     2  FROM `students`
@@ -178,7 +178,7 @@
     9  GROUP BY `students`.`id`, `courses`.`id`
     10 HAVING MAX(`exam_student`.`vote`) >= 18;
 
-*(# Terza Soluzione)
+*(3° Terza Soluzione)
 
     1  SELECT `students`.`name`, `students`.`surname`, `courses`. `name`, COUNT(`exam_student`.`vote`) AS `num_tentativi`, MAX(`exam_student`.`vote`) AS `voto_massimo`
     2  FROM `students`
@@ -191,7 +191,7 @@
     9  GROUP BY `students`.`id`, `courses`.`id`
     10 HAVING `voto_massimo` <= 18
 
-*(# Quarta Soluzione)
+*(4° Quarta Soluzione)
 
     1 SELECT `students`.`name`, `students`.`surname`, `courses`.`name`, 
         - COUNT(`exam_student`.`vote`) AS `num_tentativi`, 
@@ -203,7 +203,7 @@
     6 GROUP BY `students`.`id`, `courses`.`id`
     7 HAVING `voto_massimo` <= 18;
 
-*(# Quinta Soluzione: utilizzo un sotto-query per ottenere il numero di tentativi per studente e corso:)
+*(5° Quinta Soluzione: utilizzo un sotto-query per ottenere il numero di tentativi per studente e corso:)
 
     1   SELECT `students`.`name`, `students`.`surname`, `courses`.`name`, `subquery`.`num_tentativi`
     2   FROM `students`
@@ -220,7 +220,7 @@
     5   JOIN `courses`
     6   ON `courses`.`id` = `subquery`.`course_id`;
 
-*(# Sesta Soluzione: utilizzo un sotto-query per ottenere il numero di tentativi per studente e corso:)
+*(6° Sesta Soluzione: utilizzo un sotto-query per ottenere il numero di tentativi per studente e corso:)
 
     1   SELECT `students`.`name`, `students`.`surname`, `courses`.`name`, `num_tentativi`, `voto_massimo`
     2   FROM `students`
