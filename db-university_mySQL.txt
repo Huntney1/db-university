@@ -14,7 +14,8 @@
 
     1 SELECT *
     2 FROM `students`
-    3 WHERE YEAR(CURDATE()) - YEAR(`date_of_birth`) > 30
+    3 WHERE YEAR(CURDATE()) - YEAR(`date_of_birth`) > 30   
+        (#Si può fare anche in modo differenmte[TIMESTAMPDIFF(YEAR, `date_of_birth`, CURDATE()) > 30])
 
 4. Selezionare tutti i corsi del primo semestre del primo anno di un qualsiasi corso di laurea (286)
 
@@ -28,7 +29,8 @@
     1 SELECT * 
     2 FROM `exams`
     3 WHERE `date` = '2020-06-20'
-    4 AND `hour` > '14:00:00'
+    4 AND `hour` >= '14:00:00'   
+        (#Si può utilizzare queto valore [14])
 
 6. Selezionare tutti i corsi di laurea magistrale (38)
 
@@ -38,11 +40,13 @@
 
 7. Da quanti dipartimenti è composta l'università? (12)
 
-    1 SELECT*
+    1 SELECT COUNT(*) as numero_dipartimenti  
+        (#non c'era prima delle correzione [COUNT(*) as numero_dipartimenti])
     2 FROM `departments`
 
 8. Quanti sono gli insegnanti che non hanno un numero di telefono? (50)
 
-    1 SELECT*
+    1 SELECT CUUNT(*) AS number_teachers  
+        (# prima delle correzione non c'era [CUUNT(*) AS number_teachers])
     2 FROM `teachers`
     3 WHERE `phone` IS NULL
