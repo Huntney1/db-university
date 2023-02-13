@@ -70,7 +70,7 @@
 3. Calcolare la media dei voti di ogni appello d'esame
 
     1 SELECT ROUND(AVG(`vote`), 0.5) AS `Media_Voti`, `exam_id` AS `Appello`
-        (# Si Può Utilizzare anche [FLOOR(AVG(`vote`) + 0.5)] ristituisce Num_Int al contrario di ROUND)
+        (# Si Può Utilizzare anche [FLOOR(AVG(`vote`) + 0.5)] ristituisce Num_Int al contrario di [ROUND])
     2 FROM `exam_student`
     3 GROUP BY `exam_id`
 
