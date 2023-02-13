@@ -15,7 +15,7 @@
     1 SELECT *
     2 FROM `students`
     3 WHERE YEAR(CURDATE()) - YEAR(`date_of_birth`) > 30   
-        (#Si può fare anche in modo differenmte[TIMESTAMPDIFF(YEAR, `date_of_birth`, CURDATE()) > 30])
+        (# Si può fare anche in modo differenmte[TIMESTAMPDIFF(YEAR, `date_of_birth`, CURDATE()) > 30])
 
 4. Selezionare tutti i corsi del primo semestre del primo anno di un qualsiasi corso di laurea (286)
 
@@ -30,7 +30,7 @@
     2 FROM `exams`
     3 WHERE `date` = '2020-06-20'
     4 AND `hour` >= '14:00:00'   
-        (#Si può utilizzare queto valore [14])
+        (# Si può utilizzare queto valore [14])
 
 6. Selezionare tutti i corsi di laurea magistrale (38)
 
@@ -41,7 +41,7 @@
 7. Da quanti dipartimenti è composta l'università? (12)
 
     1 SELECT COUNT(*) as numero_dipartimenti  
-        (#non c'era prima delle correzione [COUNT(*) as numero_dipartimenti])
+        (# non c'era prima delle correzione [COUNT(*) as numero_dipartimenti])
     2 FROM `departments`
 
 8. Quanti sono gli insegnanti che non hanno un numero di telefono? (50)
@@ -56,9 +56,30 @@
 [* GROUP BY *]
 
 1. Contare quanti iscritti ci sono stati ogni anno
+
+    1 SELECT COUNT(*) AS 'Num_Iscritti',YEAR(`enrolment_date`) as `year`
+    2 FROM `students`
+    3 GROUP BY `year`  
+
 2. Contare gli insegnanti che hanno l'ufficio nello stesso edificio
+
+    1 SELECT COUNT(*) AS 'Num_Teacher', `office_address`
+    2 FROM `teachers`
+    3 GROUP BY `office_address`
+
 3. Calcolare la media dei voti di ogni appello d'esame
-4. Contare quanti corsi di laurea ci sono per ogni dipartimento
+
+    1 SELECT ROUND(AVG(`vote`), 0.5) AS `Media_Voti`, `exam_id` AS `Appello`
+        (# Si Può Utilizzare anche [FLOOR(AVG(`vote`) + 0.5)] ristituisce Num_Int al contrario di ROUND)
+    2 FROM `exam_student`
+    3 GROUP BY `exam_id`
+
+4. Contare quanti corsi di laurea ci sono per ogni dipartimento (12)
+
+    1 SELECT COUNT(*) AS 'Num_Coursi_Laurea', `department_id`
+    2 FROM `degrees`
+    3 GROUP BY `department_id`
+
 
 
 
