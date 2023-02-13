@@ -220,7 +220,7 @@
     5   JOIN `courses`
     6   ON `courses`.`id` = `subquery`.`course_id`;
 
-*(# Sesta` Soluzione: utilizzo un sotto-query per ottenere il numero di tentativi per studente e corso:)
+*(# Sesta Soluzione: utilizzo un sotto-query per ottenere il numero di tentativi per studente e corso:)
 
     1   SELECT `students`.`name`, `students`.`surname`, `courses`.`name`, `num_tentativi`, `voto_massimo`
     2   FROM `students`
