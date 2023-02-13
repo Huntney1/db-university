@@ -203,19 +203,35 @@
     6 GROUP BY `students`.`id`, `courses`.`id`
     7 HAVING `voto_massimo` <= 18;
 
-*(# Quinta Soluzione: utilizzando un sotto-query per ottenere il numero di tentativi per studente e corso:)
+*(# Quinta Soluzione: utilizzo un sotto-query per ottenere il numero di tentativi per studente e corso:)
 
-    1  SELECT `students`.`name`, `students`.`surname`, `courses`.`name`, `subquery`.`num_tentativi`
-    2  FROM `students`
-    3  JOIN (
-    4   SELECT `student_id`, `course_id`, COUNT(vote) AS `num_tentativi`
-    5   FROM `exam_student`
-    6   JOIN `exams`
-    7   ON `exams`.`id` = `exam_student`.`exam_id`
-    8   JOIN `courses`
-    9   ON `courses`.`id` = `exams`.`course_id`
-    10  WHERE `vote` >= 18
-    11  GROUP BY `student_id`, `course_id`) AS `subquery`
-    12 ON `students`.`id` = `subquery`.`student_id`
-    13 JOIN `courses`
-    14 ON `courses`.`id` = `subquery`.`course_id`;
+    1   SELECT `students`.`name`, `students`.`surname`, `courses`.`name`, `subquery`.`num_tentativi`
+    2   FROM `students`
+    3   JOIN (
+    3.1     SELECT `student_id`, `course_id`, COUNT(vote) AS `num_tentativi`
+    3.2     FROM `exam_student`
+    3.3     JOIN `exams`
+    3.4     ON `exams`.`id` = `exam_student`.`exam_id`
+    3.5     JOIN `courses`
+    3.6     ON `courses`.`id` = `exams`.`course_id`
+    3.7     WHERE `vote` >= 18
+    3.8     GROUP BY `student_id`, `course_id`) AS `subquery`
+    4   ON `students`.`id` = `subquery`.`student_id`
+    5   JOIN `courses`
+    6   ON `courses`.`id` = `subquery`.`course_id`;
+
+*(# Sesta` Soluzione: utilizzo un sotto-query per ottenere il numero di tentativi per studente e corso:)
+
+    1   SELECT `students`.`name`, `students`.`surname`, `courses`.`name`, `num_tentativi`, `voto_massimo`
+    2   FROM `students`
+    3   JOIN (SELECT `student_id`, `course_id`, COUNT(`vote`) AS `num_tentativi`, MAX(`vote`) AS `voto_massimo`
+    3.1     FROM `exam_student`
+    3.2     JOIN `exams` ON `exams`.`id` = `exam_student`.`exam_id`
+    3.3     JOIN `courses` ON `courses`.`id` = `exams`.`course_id`
+    3.4     GROUP BY `student_id`, `course_id`) AS `subquery`
+    4   ON `students`.`id` = `subquery`.`student_id`
+    5   JOIN `courses` ON `courses`.`id` = `subquery`.`course_id`
+    6   HAVING `voto_massimo` <= 18;
+
+
+ 
