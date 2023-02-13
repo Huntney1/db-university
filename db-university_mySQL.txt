@@ -87,15 +87,31 @@
 
 1. Selezionare tutti gli studenti iscritti al Corso di Laurea in Economia
 
+    1 SELECT `students`.`name`, `students`.`surname`, `degrees`.`name`
+    2 FROM `students`
+    3 JOIN `degrees`
+    4 ON `degrees`.`id` = `students`.`degree_id`
+    5 WHERE `degrees`.`name` LIKE 'Corso di Laurea in Economia'
+        (# Si Può Utilizzare anche senza [LIKE] [`degrees`.`name` = 'Corso di Laurea in Economia'])
 
+2. Selezionare tutti i Corsi di Laurea Magistrale del Dipartimento di Neuroscienze (7)
 
-2. Selezionare tutti i Corsi di Laurea Magistrale del Dipartimento di Neuroscienze
+    1 SELECT `degrees`.`name`, `departments`.`name`
+    2 FROM `degrees`
+    3 JOIN `departments`
+    4 ON `departments`.`id` = `degrees`.`department_id`
+    5 WHERE `departments`.`name` = 'Dipartimento di Neuroscienze'
 
+3. Selezionare tutti i corsi in cui insegna Fulvio Amato (id=44) (11)
 
-
-3. Selezionare tutti i corsi in cui insegna Fulvio Amato (id=44)
-
-
+    1 SELECT `courses`.`name`, `teachers`.`name`, `teachers`.`surname`, `teachers`.`id`
+    2 FROM `courses`
+    3 JOIN `course_teacher`
+    4 ON `courses`.`id` = `course_id`
+    5 JOIN `teachers`
+    6 ON `teachers`.`id` = `teacher_id`
+    7 WHERE `teachers`.`name` = 'Fulvio'
+    8 AND `teachers`.`surname` = 'Amato'
 
 4. Selezionare tutti gli studenti con i dati relativi al corso di laurea a cui sono iscritti e il
    relativo dipartimento, in ordine alfabetico per cognome e nome
